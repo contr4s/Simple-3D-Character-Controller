@@ -1,10 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
-public class CharacterController : MonoBehaviour
+[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(Animator))]
+public class CharacterController: MonoBehaviour
 {
+    public const string JumpingState = "isJumping";
+    public const string RunningState = "isRunning";
+    public const string TurningState = "turn";
+
     [Range(5f, 60f)]
     [SerializeField] float _slopeLimit = 45f;
     [SerializeField] float _moveSpeed = 5f;
@@ -13,17 +18,48 @@ public class CharacterController : MonoBehaviour
     [SerializeField] float _jumpSpeed = 4f;
 
     public bool IsGrounded { get; private set; }
-    public float ForwardInput { get; set; }
-    public float TurnInput { get; set; }
-    public bool JumpInput { get; set; }
+
+    private float _forwardInput;
+    public float ForwardInput
+    {
+        get => _forwardInput;
+        set
+        {
+            _forwardInput = value;
+            _animator.SetBool(RunningState, !Mathf.Approximately(value, 0));
+        }
+    }
+
+    private float _turnInput;
+    public float TurnInput {
+        get => _turnInput;
+        set { 
+            _turnInput = value;
+            _animator.SetFloat("turn", value);
+        }
+    }
+
+    private bool _jumpInput;
+    public bool JumpInput
+    {
+        get => _jumpInput;
+        set
+        {
+            _jumpInput = value;
+            _animator.SetBool(JumpingState, value);
+        }
+    }
 
     private Rigidbody _rigidbody;
     private CapsuleCollider _capsuleCollider;
+    private Animator _animator;
+    
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
+        _animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -79,5 +115,17 @@ public class CharacterController : MonoBehaviour
                 _rigidbody.velocity = verticalVelocity + transform.forward * Mathf.Clamp(ForwardInput, -1f, 1f) * _moveSpeed / 2f;
             }
         }
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is CharacterController controller &&
+               base.Equals(obj) &&
+               ForwardInput == controller.ForwardInput;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(base.GetHashCode(), ForwardInput);
     }
 }
