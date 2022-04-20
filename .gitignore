@@ -58,3 +58,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Character Controller/Assets/external
+Character Controller/Library
+Character Controller/Temp
+Character Controller/Logs
+Character Controller/obj
