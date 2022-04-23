@@ -610,6 +610,7 @@ GameObject:
   - component: {fileID: 4614477534960477930}
   - component: {fileID: 4614477534960477925}
   - component: {fileID: 4614477534960477924}
+  - component: {fileID: 985441853}
   m_Layer: 0
   m_Name: character
   m_TagString: Untagged
@@ -707,10 +708,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slopeLimit: 45
-  _moveSpeed: 5
-  _turnSpeed: 300
+  _moveSpeed: 4
+  _turnSpeed: 200
   _allowJump: 1
-  _jumpSpeed: 10
+  _jumpSpeed: 4
+--- !u!114 &985441853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4614635299492679483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede4436b16eda4e428c707a9501594e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clothes:
+  - type: 0
+    wearSet: {fileID: 4615351895416456789}
+    nakedSet: {fileID: 4615990790135824523}
+  - type: 1
+    wearSet: {fileID: 4616186600805324485}
+    nakedSet: {fileID: 4615249121818666503}
+  - type: 2
+    wearSet: {fileID: 4615944022677075283}
+    nakedSet: {fileID: 4615442142658457575}
 --- !u!1 &4614638262530442355
 GameObject:
   m_ObjectHideFlags: 0
