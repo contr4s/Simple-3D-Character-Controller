@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraSwitcher : MonoBehaviour
 {
     [SerializeField] Camera _main;
-    [SerializeField] Camera _additional;
+    public Camera Additional { get; set; }
 
     bool _isMainActive;
 
@@ -18,6 +18,6 @@ public class CameraSwitcher : MonoBehaviour
     {
         _isMainActive = !_isMainActive;
         _main.gameObject.SetActive(_isMainActive);
-        _additional.gameObject.SetActive(!_isMainActive);
+        Additional.gameObject.SetActive(!_isMainActive);
     }
 }

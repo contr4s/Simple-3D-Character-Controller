@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(Animator))]
-public class CharacterController: MonoBehaviour
+public class CharacterController: MonoBehaviourPun
 {
     public const string JumpingState = "isJumping";
     public const string RunningState = "isRunning";
@@ -16,6 +17,12 @@ public class CharacterController: MonoBehaviour
     [SerializeField] float _turnSpeed = 300;
     [SerializeField] bool _allowJump = true;
     [SerializeField] float _jumpSpeed = 4f;
+
+    [SerializeField] CharacterDressing _characterDressing;
+    public CharacterDressing CharacterDressing => _characterDressing;
+
+    [SerializeField] Camera _playerCam;
+    public Camera Camera => _playerCam;
 
     public bool IsGrounded { get; private set; }
 
@@ -60,6 +67,15 @@ public class CharacterController: MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
         _animator = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        if (photonView.IsMine)
+        {
+            var core = FindObjectOfType<GameCore>();
+            core.Init(this);
+        }       
     }
 
     private void FixedUpdate()

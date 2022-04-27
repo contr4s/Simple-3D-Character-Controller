@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class DressButton : MonoBehaviour
 {
     [SerializeField] CharacterDressing.ClothesType _clothesType;
-    [SerializeField] CharacterDressing _character;
+    public CharacterDressing Character { get; set; }
 
     private void Awake()
     {
-        GetComponent<Button>().onClick.AddListener(() => _character.WearClothes(_clothesType));
+        GetComponent<Button>().onClick.AddListener(() => Character.WearClothes(_clothesType));
     }
 }
