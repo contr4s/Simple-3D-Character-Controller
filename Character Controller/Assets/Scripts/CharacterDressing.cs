@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Photon.Pun;
 using UnityEngine;
 
-public class CharacterDressing : MonoBehaviour
+public class CharacterDressing : MonoBehaviour, IPunObservable
 {
     [SerializeField] private WearPair[] _clothes;
 
@@ -21,6 +22,30 @@ public class CharacterDressing : MonoBehaviour
         bool isWeared = wear.wearSet.activeInHierarchy;
         wear.wearSet.SetActive(!isWeared);
         wear.nakedSet.SetActive(isWeared);
+    }
+
+    public void WearClothes(ClothesType type, bool putOn)
+    {
+        var wear = _availibleClothes[type];
+        wear.wearSet.SetActive(putOn);
+        wear.nakedSet.SetActive(!putOn);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            foreach (var val in _availibleClothes)
+            {
+                stream.SendNext(val.Value.wearSet.activeInHierarchy);
+            }
+        }
+        else
+        {
+            WearClothes(ClothesType.Shirt, (bool)stream.ReceiveNext());
+            WearClothes(ClothesType.Pants, (bool)stream.ReceiveNext());
+            WearClothes(ClothesType.Boots, (bool)stream.ReceiveNext());
+        }
     }
 
     public enum ClothesType
