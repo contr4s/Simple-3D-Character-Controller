@@ -75,7 +75,11 @@ public class CharacterController: MonoBehaviourPun
         {
             var core = FindObjectOfType<GameCore>();
             core.Init(this);
-        }       
+        }
+        else
+        {
+            _playerCam.gameObject.SetActive(false);
+        }
     }
 
     private void FixedUpdate()

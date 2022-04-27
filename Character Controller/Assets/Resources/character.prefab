@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2798888508620548115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6694942905457281886}
+  m_Layer: 0
+  m_Name: bottom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6694942905457281886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798888508620548115}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4613662760283179911}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4614477534977591747
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,9 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a89767932fa5da469d083f840f66664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _referenceTransform: {fileID: 4613662760283179911}
+  _referenceTransform: {fileID: 4613672685882950691}
+  _referenceTransformBottom: {fileID: 6694942905457281886}
   _collisionOffset: 0.3
   _cameraSpeed: 15
+  _mask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &4614477536197026689
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,6 +681,7 @@ Transform:
   - {fileID: 4618720050264226691}
   - {fileID: 4618943944855563017}
   - {fileID: 4614477536197026694}
+  - {fileID: 6694942905457281886}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -725,7 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slopeLimit: 45
-  _moveSpeed: 4
+  _moveSpeed: 3
   _turnSpeed: 200
   _allowJump: 1
   _jumpSpeed: 4

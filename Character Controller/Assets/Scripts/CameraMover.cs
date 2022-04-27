@@ -6,7 +6,8 @@ public class CameraMover : MonoBehaviour
 {
     [SerializeField] Transform _referenceTransform;
     [SerializeField] float _collisionOffset = 0.3f;
-    [SerializeField] float _cameraSpeed = 15f; 
+    [SerializeField] float _cameraSpeed = 15f;
+    [SerializeField] LayerMask _mask;
 
     Vector3 _defaultPos;
     Vector3 _directionNormalized;
@@ -30,7 +31,7 @@ public class CameraMover : MonoBehaviour
     {
         Vector3 currentPos = _defaultPos;
         Vector3 dirTmp = _parentTransform.TransformPoint(_defaultPos) - _referenceTransform.position;
-        if (Physics.SphereCast(_referenceTransform.position, _collisionOffset, dirTmp, out RaycastHit hit, _defaultDistance))
+        if (Physics.SphereCast(_referenceTransform.position, _collisionOffset, dirTmp, out RaycastHit hit, _defaultDistance, _mask))
         {
             currentPos = (_directionNormalized * (hit.distance - _collisionOffset));
             transform.localPosition = currentPos;
